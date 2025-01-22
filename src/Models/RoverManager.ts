@@ -1,5 +1,3 @@
-// src/RoverManager.ts
-
 import { Rover } from "./Rover";
 import { Plateau } from "./Plateau";
 
@@ -15,16 +13,14 @@ export class RoverManager {
   public addRover(rover: Rover): void {
     if (this.isPositionOccupied(rover)) {
       console.warn(`Position déjà occupée : ${rover.getPosition()}`);
-    } else {
-      this.rovers.push(rover);
+      return; // Empêche l'ajout si la position est occupée
     }
+    this.rovers.push(rover);
   }
 
   // Vérifier si une position est occupée par un autre rover
   private isPositionOccupied(rover: Rover): boolean {
-    return this.rovers.some(
-      (r) => r.getPosition() === rover.getPosition()
-    );
+    return this.rovers.some((r) => r["x"] === rover["x"] && r["y"] === rover["y"]);
   }
 
   // Exécuter les commandes pour un rover

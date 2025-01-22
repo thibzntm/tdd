@@ -1,5 +1,3 @@
-// src/Rover.ts
-
 type Direction = "N" | "E" | "S" | "W";
 import { Plateau } from "./Plateau";
 
@@ -18,6 +16,8 @@ export class Rover {
   public getPosition(): string {
     return `(${this.x}, ${this.y}, ${this.direction})`;
   }
+  
+  
 
   // Méthode pour tourner à gauche
   public turnLeft(): void {
@@ -73,7 +73,7 @@ export class Rover {
           this.moveForward(plateau);
           break;
         default:
-          console.warn(`Commande inconnue : ${command}`);
+          throw new Error(`Commande inconnue : ${command}`); // Plus strict
       }
     }
   }
