@@ -24,14 +24,17 @@ export class RoverManager {
   }
 
   // Exécuter les commandes pour un rover
-  public executeCommands(roverIndex: number, commands: string): void {
-    if (this.rovers[roverIndex]) {
-      const rover = this.rovers[roverIndex];
-      rover.executeCommands(commands, this.plateau);
-    } else {
-      console.error(`Rover inexistant à l'indice ${roverIndex}`);
+  public executeCommands(roverIndex: number, commands: string): boolean {
+    if (roverIndex < 0 || roverIndex >= this.rovers.length) {
+      console.error(`Indice de rover invalide : ${roverIndex}`);
+      return false; // Échec de l'exécution
     }
+  
+    const rover = this.rovers[roverIndex];
+    rover.executeCommands(commands, this.plateau);
+    return true; // Succès
   }
+  
 
   // Afficher l'état de tous les rovers
   public showRoversStatus(): void {

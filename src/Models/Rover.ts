@@ -59,8 +59,9 @@ export class Rover {
     }
   }
 
-  // Méthode pour exécuter une série de commandes
   public executeCommands(commands: string, plateau: Plateau): void {
+    let invalidCommands = 0;
+  
     for (const command of commands) {
       switch (command) {
         case "L":
@@ -73,8 +74,14 @@ export class Rover {
           this.moveForward(plateau);
           break;
         default:
-          throw new Error(`Commande inconnue : ${command}`); // Plus strict
+          console.warn(`Commande inconnue : ${command}`);
+          invalidCommands++;
       }
     }
+  
+    if (invalidCommands > 0) {
+      console.warn(`Nombre de commandes invalides ignorées : ${invalidCommands}`);
+    }
   }
+  
 }
